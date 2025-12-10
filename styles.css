@@ -1,0 +1,51 @@
+
+:root{
+  --bg:#0f172a; --card:#0b1220; --muted:#94a3b8; --text:#e2e8f0;
+  --primary:#22c55e; --primary-2:#16a34a; --accent:#38bdf8; --border:#1f2937;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: Vazirmatn, system-ui, -apple-system, Segoe UI, Roboto, tahoma, sans-serif;
+  background: radial-gradient(1200px 600px at 80% -10%, #0ea5e922, transparent),
+              radial-gradient(1000px 500px at -10% 10%, #22c55e22, transparent),
+              var(--bg);
+  color:var(--text);
+}
+.container{max-width:900px; margin:0 auto; padding:16px;}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:16px; margin:12px 0; box-shadow:0 10px 30px #0003;
+}
+h1{margin:8px 0 12px; font-size:26px}
+h2{margin:0 0 10px; font-size:20px}
+p{color:var(--muted); margin:8px 0}
+label{display:block; margin:8px 0; line-height:1.6}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.btn{
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color:#fff; border:none; border-radius:12px; padding:10px 14px; font-weight:700; cursor:pointer;
+}
+.btn.ghost{background:transparent; border:1px solid var(--border); color:var(--text);}
+.btn.alt{background:linear-gradient(135deg, var(--accent), #0284c7);}
+.badge{display:inline-block; padding:4px 8px; border:1px solid #ffffff22; border-radius:999px; color:#cbd5e1; font-size:12px}
+.grid{display:grid; grid-template-columns:repeat(1,1fr); gap:8px}
+@media(min-width:720px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+.kb{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0}
+.kb button{padding:8px 10px; border:1px solid var(--border); background:#0a1020; color:#cbd5e1; border-radius:10px; cursor:pointer}
+.help{font-size:13px; color:#93c5fd; background:#0b1b2e; border:1px dashed #1d4ed8; padding:8px; border-radius:10px; margin:8px 0}
+.small{font-size:12px; color:var(--muted)}
+.input, textarea{
+  width:100%; background:#0a1020; color:#e2e8f0; border:1px solid var(--border);
+  border-radius:10px; padding:10px; outline:none;
+}
+textarea{min-height:90px}
+.install-bar{
+  position:fixed; inset-inline:12px; bottom:12px; background:#0b1220; border:1px solid var(--border);
+  border-radius:14px; padding:10px; display:flex; gap:8px; align-items:center; justify-content:space-between; z-index:50;
+}
+.table{width:100%; border-collapse:collapse; font-size:14px}
+.table th,.table td{border:1px solid var(--border); padding:6px 8px; text-align:right}
+hr{border:none; border-top:1px solid var(--border); margin:12px 0}
+code{background:#111827; padding:2px 6px; border-radius:6px}

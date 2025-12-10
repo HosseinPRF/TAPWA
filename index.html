@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TA Journal (PWA) — ژورنال تعاملی TA</title>
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="icons/icon-192.png">
+</head>
+<body>
+  <div id="app" class="container"></div>
+
+  <template id="tpl-install">
+    <div class="install-bar">
+      <span>برای نصب آفلاین روی گوشی: «نصب اپ»</span>
+      <button id="btn-install" class="btn">نصب اپ</button>
+      <button id="btn-close-install" class="btn ghost">بستن</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); });
+    }
+  </script>
+</body>
+</html>
