@@ -1,9 +1,9 @@
-const CACHE_NAME = "tapwa-v5";
+const CACHE_NAME = "tapwa-v6";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
-  "./app.js",
+  "./app.v6.js",   // ← اسم فایل JS جدید
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png"
@@ -13,7 +13,6 @@ self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
   self.skipWaiting();
 });
-
 self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -22,7 +21,6 @@ self.addEventListener("activate", e => {
   );
   self.clients.claim();
 });
-
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   e.respondWith(
