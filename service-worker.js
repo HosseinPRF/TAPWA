@@ -1,4 +1,5 @@
-const CACHE = "tapwa-v1"; // هر بار آپدیت، نسخه رو تغییر بده
+// TAPWA PWA cache
+const CACHE = "tapwa-v1";
 const ASSETS = [
   "./",
   "./index.html",
@@ -15,12 +16,14 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
     )
   );
 });
 
 self.addEventListener("fetch", (e) => {
-  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match("./")))
+  );
 });
