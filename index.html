@@ -1,225 +1,230 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TA PWA</title>
-  <link rel="manifest" href="./manifest.webmanifest" type="application/manifest+json" />
-  <meta name="theme-color" content="#0ea5e9" />
-  <link rel="icon" sizes="192x192" href="./icon-192.png" />
-  <link rel="icon" sizes="512x512" href="./icon-512.png" />
-  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d9488" />
+  <title>TAPWA — ثبت تجربه TA</title>
+
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" sizes="192x192" href="./icon-192.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png" />
 </head>
 <body>
-  <header class="appbar">
-    <h1>دفترچهٔ TA (آفلاین)</h1>
-    <div class="appbar-actions">
-      <button id="btn-restart" class="ghost">شروع از اول 🔄</button>
-      <button id="btn-clear" class="ghost">پاک‌سازی داده‌ها</button>
-    </div>
+
+  <!-- نوار بالایی ثابت با دکمه «شروع از اول» که همیشه در دسترس است -->
+  <header class="topbar">
+    <div class="brand">TAPWA</div>
+    <button id="btn-reset" class="ghost">شروع از اول 🔄</button>
   </header>
 
   <main id="app">
+    <!-- Screen 0: معرفی/دریافت اطلاعات اولیه -->
+    <section id="screen-intro" class="screen active">
+      <h1>شروع ثبت تجربه تحلیل رفتار متقابل</h1>
+      <p class="muted">لطفاً اطلاعات پایه را وارد کن.</p>
 
-    <!-- گام 0: معرفی کوتاه -->
-    <section class="screen active" id="screen-intro">
-      <p>این ابزار کمک می‌کند یک موقعیت را با چارچوب TA ثبت و مرور کنی. داده‌ها روی همین دستگاه ذخیره می‌شوند.</p>
-      <div class="fields">
-        <label>نام شما
-          <input id="your_name" placeholder="مثلاً: حسین" />
-        </label>
-        <label>نام طرف مقابل
-          <input id="other_name" placeholder="مثلاً: علی" />
-        </label>
-        <label>خلاصهٔ موقعیت (۱–۳ جمله)
-          <textarea id="summary" rows="3" placeholder="کوتاه بنویس..."></textarea>
-        </label>
-      </div>
-      <div class="nav">
-        <span></span>
-        <button id="next-0" class="primary">ادامه</button>
+      <label class="field">
+        <span>نام شما</span>
+        <input id="your_name" type="text" placeholder="مثلاً حسین" autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>نام طرف مقابل</span>
+        <input id="other_name" type="text" placeholder="مثلاً علی" autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>خلاصه کوتاه موقعیت</span>
+        <textarea id="summary" rows="3" placeholder="۱–۳ جمله درباره موقعیت..."></textarea>
+      </label>
+
+      <div class="actions">
+        <!-- تغییر اصلی: type="button" -->
+        <button id="next-0" class="primary" type="button">ادامه</button>
       </div>
     </section>
 
-    <!-- گام 1: نقش شما (+ زیرنقش فوری) -->
-    <section class="screen" id="screen-your-role">
+    <!-- Screen 1: نقش شما -->
+    <section id="screen-your-role" class="screen">
       <h2>نقش خودت را انتخاب کن</h2>
-      <p class="help">🎭
-        کودک 👶 (خودانگیختگی/احساس)
-        <br>بالغ 🧠 (واقع‌بین/حل‌مسئله)
-        <br>والد 👨‍🏫 (قواعد/حمایت یا انتقاد)
+      <p class="hint">
+        کودک 👶 — نماینده احساسات و خودانگیختگی |
+        بالغ 🧠 — منطقی و واقع‌نگر |
+        والد 👨‍🏫 — قواعد و ارزش‌های درونی‌شده
+      </p>
+      <div id="your-role-choices" class="grid"></div>
+      <div id="your-subrole-choices" class="grid" style="display:none"></div>
+
+      <div class="actions">
+        <button id="back-1" class="ghost">بازگشت</button>
+        <button id="next-1" class="primary">ادامه</button>
+      </div>
+    </section>
+
+    <!-- Screen 2: نقش طرف مقابل -->
+    <section id="screen-other-role" class="screen">
+      <h2>نقش طرف مقابل را انتخاب کن</h2>
+      <p class="hint">
+        برای کودک/والد، زیرنقش‌ها بعد از انتخاب، همین‌جا نمایش داده می‌شوند.
+      </p>
+      <div id="other-role-choices" class="grid"></div>
+      <div id="other-subrole-choices" class="grid" style="display:none"></div>
+
+      <div class="actions">
+        <button id="back-2" class="ghost">بازگشت</button>
+        <button id="next-2" class="primary">ادامه</button>
+      </div>
+    </section>
+
+    <!-- Screen 3: احساس‌ها -->
+    <section id="screen-emotions" class="screen">
+      <h2>احساس‌های غالب تو چه بوده؟</h2>
+      <p class="hint">می‌تونی چندتا انتخاب کنی؛ در پایان «اتمام انتخاب» را بزن.</p>
+      <div id="emotion-choices" class="grid"></div>
+      <div class="actions">
+        <button id="back-3" class="ghost">بازگشت</button>
+        <button id="emotions-done" class="primary">✅ اتمام انتخاب</button>
+      </div>
+    </section>
+
+    <!-- Screen 4: نیازهای شما -->
+    <section id="screen-your-needs" class="screen">
+      <h2>نیازهای خودت را انتخاب کن</h2>
+      <div class="hint">
+        <div><strong>بقا 🛡️</strong> — امنیت/سلامت/پول/نظم</div>
+        <div><strong>عشق و تعلق 💞</strong> — ارتباط/پذیرفته‌شدن</div>
+        <div><strong>قدرت و ارزشمندی 💪</strong> — اثرگذاری/احترام</div>
+        <div><strong>آزادی 🕊️</strong> — استقلال/حق انتخاب</div>
+        <div><strong>تفریح و لذت 🎨</strong> — سرگرمی/خلاقیت</div>
+      </div>
+      <div id="your-need-choices" class="grid"></div>
+      <div class="actions">
+        <button id="back-4" class="ghost">بازگشت</button>
+        <button id="your-needs-done" class="primary">✅ اتمام انتخاب</button>
+      </div>
+    </section>
+
+    <!-- Screen 5: جزئیات نیازهای شما (شدت/جهت/راهبرد/نتیجه) -->
+    <section id="screen-your-need-details" class="screen">
+      <h2 id="your-need-title">جزئیات نیاز</h2>
+      <div id="your-need-steptext" class="hint"></div>
+      <div id="your-need-options" class="grid"></div>
+      <div class="actions">
+        <button id="back-5" class="ghost">بازگشت</button>
+        <button id="next-5" class="primary">ادامه</button>
+      </div>
+    </section>
+
+    <!-- Screen 6: نیازهای طرف مقابل -->
+    <section id="screen-other-needs" class="screen">
+      <h2>به نظرت نیازهای طرف مقابل چه بوده؟</h2>
+      <div class="hint">
+        <div><strong>بقا 🛡️</strong> — امنیت/سلامت/پول/نظم</div>
+        <div><strong>عشق و تعلق 💞</strong> — ارتباط/پذیرفته‌شدن</div>
+        <div><strong>قدرت و ارزشمندی 💪</strong> — اثرگذاری/احترام</div>
+        <div><strong>آزادی 🕊️</strong> — استقلال/حق انتخاب</div>
+        <div><strong>تفریح و لذت 🎨</strong> — سرگرمی/خلاقیت</div>
+      </div>
+      <div id="other-need-choices" class="grid"></div>
+      <div class="actions">
+        <button id="back-6" class="ghost">بازگشت</button>
+        <button id="other-needs-done" class="primary">✅ اتمام انتخاب</button>
+      </div>
+    </section>
+
+    <!-- Screen 7: جزئیات نیازهای طرف مقابل -->
+    <section id="screen-other-need-details" class="screen">
+      <h2 id="other-need-title">جزئیات نیاز</h2>
+      <div id="other-need-steptext" class="hint"></div>
+      <div id="other-need-options" class="grid"></div>
+      <div class="actions">
+        <button id="back-7" class="ghost">بازگشت</button>
+        <button id="next-7" class="primary">ادامه</button>
+      </div>
+    </section>
+
+    <!-- Screen 8: بازی‌ها -->
+    <section id="screen-games" class="screen">
+      <h2>آیا این موقعیت بوی «بازی» می‌داد؟</h2>
+      <div class="hint">
+        بازی = الگوی تکراری که با سوئیچ نقش‌ها (قربانی/نجاتگر/آزارگر) و حس ناخوشایند تمام می‌شود.
+        <br/>نشانه‌ها: رد پشت‌سرهم کمک با «ولی…»، کمین برای خطا، تنش بالا، پایان بدون حل مسئله.
+      </div>
+      <div class="actions">
+        <button id="games-no" class="ghost">خیر</button>
+        <button id="games-yes" class="primary">بله</button>
+      </div>
+
+      <div id="game-picker" style="display:none">
+        <h3>نام بازی/بازی‌ها را انتخاب کن</h3>
+        <div id="game-choices" class="grid"></div>
+        <div class="hint" id="game-info-block"></div>
+        <div class="actions">
+          <button id="games-done" class="primary">✅ اتمام انتخاب</button>
+        </div>
+      </div>
+
+      <div id="switch-note-block" style="display:none">
+        <h3>🧩 لحظهٔ سوئیچ را کوتاه بنویس</h3>
+        <p class="hint" id="switch-guide"></p>
+        <textarea id="switch-note" rows="3" placeholder="مثال: وقتی گفت «تو اصلاً نمی‌فهمی…»، من از بالغ→والد انتقادگر رفتم و او قربانی شد."></textarea>
+        <div class="actions">
+          <button id="switch-save" class="primary">ثبت</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="back-8" class="ghost">بازگشت</button>
+      </div>
+    </section>
+
+    <!-- Screen 9: خلاصه و خروجی -->
+    <section id="screen-summary" class="screen">
+      <h2>خلاصهٔ تجربه</h2>
+      <pre id="summary-text" class="card"></pre>
+
+      <div class="actions">
+        <button id="btn-copy" class="secondary">کپی به کلیپ‌بورد</button>
+        <button id="btn-share" class="secondary">ارسال/اشتراک‌گذاری</button>
+        <button id="btn-save" class="primary">ذخیره محلی</button>
+      </div>
+
+      <p class="muted small">
+        ذخیره محلی روی دستگاه شما انجام می‌شود (PWA/LocalStorage). برای پاک‌سازی، از منو گزینه‌ی «پاک‌کردن داده‌ها» را بزنید.
       </p>
 
-      <fieldset id="your-role-group" class="chips">
-        <label><input type="radio" name="your-role" value="کودک" />کودک</label>
-        <label><input type="radio" name="your-role" value="بالغ" />بالغ</label>
-        <label><input type="radio" name="your-role" value="والد" />والد</label>
-      </fieldset>
-
-      <div id="your-subroles" class="subroles hidden"></div>
-
-      <div class="nav">
-        <button data-back="intro" class="ghost">بازگشت</button>
-        <button id="next-your-role" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 2: نقش طرف مقابل (+ زیرنقش فوری) -->
-    <section class="screen" id="screen-other-role">
-      <h2>نقش طرف مقابل را انتخاب کن</h2>
-      <p class="help">👤 مشابه بالا؛ اگر «کودک/والد» باشد، زیرنقش همین‌جا باز می‌شود.</p>
-
-      <fieldset id="other-role-group" class="chips">
-        <label><input type="radio" name="other-role" value="کودک" />کودک</label>
-        <label><input type="radio" name="other-role" value="بالغ" />بالغ</label>
-        <label><input type="radio" name="other-role" value="والد" />والد</label>
-      </fieldset>
-
-      <div id="other-subroles" class="subroles hidden"></div>
-
-      <div class="nav">
-        <button data-back="your-role" class="ghost">بازگشت</button>
-        <button id="next-other-role" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 3: احساسات (چندانتخابی) -->
-    <section class="screen" id="screen-emotions">
-      <h2>احساس(ها) در پایان موقعیت</h2>
-      <p class="help">می‌توانی چند مورد انتخاب کنی، یا تایپ آزاد پایین.</p>
-
-      <div id="emotion-chips" class="chips multi"></div>
-
-      <div class="fields">
-        <input id="emotion-free" placeholder="احساس دیگر... (Enter برای افزودن)" />
-      </div>
-
-      <div class="nav">
-        <button data-back="other-role" class="ghost">بازگشت</button>
-        <button id="next-emotions" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 4: نیازهای تو (چندانتخابی) -->
-    <section class="screen" id="screen-your-needs">
-      <h2>نیازهای تو در این موقعیت</h2>
-      <p class="help">ابتدا نیازها را انتخاب کن؛ سپس برای هر مورد «شدت/جهت/راهبرد/نتیجه» می‌پرسیم.</p>
-
-      <div id="your-needs-list" class="chips multi"></div>
-
-      <!-- راهنمای کوتاهِ هر نیاز (جمع‌شونده) -->
-      <details id="needs-cheatsheet" class="sheet">
-        <summary>راهنمای کوتاه نیازها</summary>
-        <ul id="needs-cheatsheet-list"></ul>
-      </details>
-
-      <div class="nav">
-        <button data-back="emotions" class="ghost">بازگشت</button>
-        <button id="next-your-needs" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 5: ویزارد جزییات نیازهای تو -->
-    <section class="screen" id="screen-your-need-detail">
-      <h2 id="detail-title"></h2>
-      <div id="detail-question" class="q"></div>
-      <div id="detail-help" class="help"></div>
-      <div id="detail-options" class="chips"></div>
-
-      <div class="nav">
-        <button id="detail-back" class="ghost">یک مرحله قبل</button>
-        <button id="detail-next" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 6: نیازهای طرف مقابل -->
-    <section class="screen" id="screen-other-needs">
-      <h2>به‌نظرت نیازهای طرف مقابل چه بود؟</h2>
-      <div id="other-needs-list" class="chips multi"></div>
-      <div class="nav">
-        <button data-back="your-need-detail" class="ghost">بازگشت</button>
-        <button id="next-other-needs" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 7: ویزارد جزییات نیازهای طرف مقابل -->
-    <section class="screen" id="screen-other-need-detail">
-      <h2 id="detail-title-other"></h2>
-      <div id="detail-question-other" class="q"></div>
-      <div id="detail-help-other" class="help"></div>
-      <div id="detail-options-other" class="chips"></div>
-
-      <div class="nav">
-        <button id="detail-back-other" class="ghost">یک مرحله قبل</button>
-        <button id="detail-next-other" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 8: بازی‌ها -->
-    <section class="screen" id="screen-games">
-      <h2>آیا این موقعیت «بوی بازی» می‌داد؟</h2>
-      <details id="games-cheatsheet" class="sheet">
-        <summary>راهنمای کامل بازی‌ها (تعریف + آنتی‌تز)</summary>
-        <div id="games-cheatsheet-body" class="note"></div>
-      </details>
-
-      <div id="game-yesno" class="chips">
-        <label><input type="radio" name="game-flag" value="بله" />بله</label>
-        <label><input type="radio" name="game-flag" value="خیر" />خیر</label>
-      </div>
-
-      <div id="game-select" class="hidden">
-        <h3>اگر بله: نام بازی‌ها</h3>
-        <div id="game-chips" class="chips multi"></div>
-        <div id="switch-guide" class="note"></div>
-        <label>لحظهٔ سوئیچ (۱–۲ جمله)
-          <textarea id="game-switch-note" rows="2" placeholder="محرک سوئیچ و چرخش نقش‌ها را بنویس..."></textarea>
-        </label>
-      </div>
-
-      <div class="nav">
-        <button data-back="other-need-detail" class="ghost">بازگشت</button>
-        <button id="next-games" class="primary">ادامه</button>
-      </div>
-    </section>
-
-    <!-- گام 9: خلاصه + ذخیره/ارسال -->
-    <section class="screen" id="screen-summary">
-      <h2>خلاصهٔ رکورد</h2>
-      <pre id="summary-text" class="summary"></pre>
-
       <div class="actions">
-        <button id="btn-save" class="primary">ذخیره در دستگاه</button>
-        <button id="btn-share" class="secondary">ارسال/کپی</button>
-        <button id="btn-view" class="ghost">مشاهدهٔ ذخیره‌ها</button>
-      </div>
-
-      <div class="nav">
-        <button data-back="games" class="ghost">بازگشت</button>
-        <button id="btn-new" class="primary">شروع رکورد جدید</button>
+        <button id="finish-new" class="ghost">شروع ثبت جدید 🔄</button>
       </div>
     </section>
-
-    <!-- لیست ذخیره‌ها -->
-    <section class="screen" id="screen-records">
-      <h2>ذخیره‌های من (روی این دستگاه)</h2>
-      <div id="records-list" class="list"></div>
-      <div class="actions">
-        <button id="btn-export-json" class="secondary">دانلود JSON</button>
-        <button id="btn-export-csv" class="secondary">دانلود CSV</button>
-      </div>
-      <div class="nav">
-        <button data-back="summary" class="primary">بازگشت به خلاصه</button>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="foot">
-    <small>آفلاین کار می‌کند — GitHub Pages</small>
-  </footer>
+  <!-- بوت‌فیکس: اگر به هر دلیلی app اصلی دیر لود شد، حرکت از ۰→۱ را تضمین می‌کند -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('next-0');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var s0 = document.getElementById('screen-intro');
+          var s1 = document.getElementById('screen-your-role');
+          if (s0 && s1) { s0.classList.remove('active'); s1.classList.add('active'); }
+        }, { once: true });
+      }
+    });
+  </script>
 
-  <script src="./app.js"></script>
+  <!-- اسکریپت اصلی نسخه‌دار (برای شکستن کش) -->
+  <script src="./app.v6.js" defer></script>
+
+  <!-- ثبت سرویس‌ورکر (اگر داخل app.v6.js هم رجیستر می‌کنی، این مشکلی ایجاد نمی‌کند) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        if (!reg) navigator.serviceWorker.register('./service-worker.js');
+      });
+    }
+  </script>
 </body>
 </html>
