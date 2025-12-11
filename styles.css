@@ -17,6 +17,7 @@ body{
   padding:12px 16px; background:#0a0f1f; border-bottom:1px solid #1f2937;
 }
 .appbar h1{margin:0; font-size:18px}
+.appbar-actions{display:flex; gap:8px}
 main{max-width:840px; margin:0 auto; padding:16px}
 .screen{display:none}
 .screen.active{display:block}
@@ -27,8 +28,8 @@ input,textarea{
   background:var(--card); color:var(--text); outline:none;
 }
 input:focus,textarea:focus{border-color:var(--pri); box-shadow:0 0 0 4px var(--ring)}
-.help{color:var(--muted); font-size:13px; margin:.5rem 0}
-.q{font-weight:600; margin:.25rem 0 .5rem}
+.help{color:var(--muted); font-size:13px; margin:.5rem 0; white-space:pre-wrap}
+.q{font-weight:600; margin:.25rem 0 .5rem; white-space:pre-wrap}
 .chips{display:flex; flex-wrap:wrap; gap:8px}
 .chip{display:inline-flex; align-items:center; gap:6px; background:#111827; border:1px solid #334155; padding:8px 12px; border-radius:999px; cursor:pointer}
 .chip input{accent-color:var(--pri)}
@@ -49,6 +50,11 @@ button.ghost{background:transparent; border-color:#334155}
 .card{background:#0a0f1f; border:1px solid #1f2937; border-radius:12px; padding:10px}
 .card .row{display:flex; gap:8px; margin-top:8px}
 .foot{padding:12px; text-align:center; color:var(--muted); font-size:12px}
+
+/* details/summary cheatsheet */
+.sheet{margin:10px 0}
+.sheet summary{cursor:pointer; color:#cbd5e1}
+.sheet summary::marker{color:#475569}
 
 /* Toast */
 #toast{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#111827; color:#fff; padding:8px 12px; border-radius:10px; border:1px solid #374151; opacity:0; transition:.2s}
