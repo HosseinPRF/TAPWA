@@ -1,24 +1,20 @@
+# TAPWA (TA Logger PWA)
 
-# TA Journal PWA (Offline)
+آفلاین کار می‌کند. داده‌ها در مرورگر شما ذخیره می‌شود (localStorage).
 
-این پوشه یک وب‌اپ کاملاً آفلاین است که روی موبایل/دسکتاپ کار می‌کند.
+## استقرار روی GitHub Pages
+1) این فایل‌ها را در **ریشه‌ی ریپو** `TAPWA` آپلود کن.
+2) در **Settings → Pages** گزینهٔ **Deploy from a branch** را انتخاب کن و `main / root` را ست کن.
+3) آدرس برنامه: `https://hosseinprf.github.io/TAPWA/`
+4) در موبایل با Chrome باز کن → منوی ⋮ → **Add to Home screen** یا **Install app**.
+5) برای به‌روزرسانی SW، مقدار `CACHE` را در `service-worker.js` افزایش بده (مثل `tapwa-v2`).
 
-## روش ۱ — GitHub Pages
-1) یک ریپوی جدید بساز و همین فایل‌ها را در ریشه‌ی ریپو پوش کن.
-2) Settings → Pages → Deploy from a branch → Branch: main → Folder: /(root)
-3) لینک پابلیک را در موبایل باز کن → منوی مرورگر → Add to Home screen / Install App.
+## آیکن‌ها
+دو فایل PNG مربعی اضافه کن:
+- `icon-192.png`
+- `icon-512.png`
 
-## روش ۲ — اجرا روی اندروید (Termux)
-```
-pkg update -y && pkg install -y python unzip
-termux-setup-storage
-cd ~/storage/downloads
-unzip taj-pwa.zip -d taj-pwa
-cd taj-pwa
-python -m http.server 8000
-```
-بعد در Chrome برو به: http://localhost:8000  و «Add to Home screen».
+(اگر نگذاری، هم کار می‌کند؛ ولی برای نمایش آیکن در Home Screen بهتر است اضافه شود.)
 
-## نکات
-- داده‌ها در localStorage می‌مانند (همان دستگاه/همان مرورگر).
-- از صفحهٔ خلاصه خروجی JSON/CSV بگیرید.
+## خروجی‌گرفتن
+بالای صفحه دکمهٔ **خروجی CSV** دارد؛ همهٔ رکوردهای ذخیره‌شده را دانلود می‌کند.
