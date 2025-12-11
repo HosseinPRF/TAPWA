@@ -10,6 +10,14 @@ const SUBROLES = {
 const EMOTIONS = ["خشم","غم","ترس","شادی","عشق","گناه","شرم","هیجان","آرامش"];
 const NEEDS = ["بقا 🛡️","عشق و تعلق 💞","قدرت و ارزشمندی 💪","آزادی 🕊️","تفریح و لذت 🎨"];
 
+const NEED_SHORT = {
+  "بقا 🛡️": "امنیت/سلامت/پول/نظم؛ وقتی شرایط ناپایدار/خطرناک حس می‌شود.",
+  "عشق و تعلق 💞": "ارتباط/صمیمیت/پذیرفته‌شدن؛ نیاز به پیوند و دیده‌شدن.",
+  "قدرت و ارزشمندی 💪": "موثر بودن/احترام/موفقیت/کنترل.",
+  "آزادی 🕊️": "استقلال/حق‌انتخاب/آزادی تصمیم/بیان.",
+  "تفریح و لذت 🎨": "سرگرمی/خلاقیت/خنده/یادگیری خوشایند."
+};
+
 const NEED_STRATEGIES = {
   "بقا 🛡️": [
     "اطمینان از امنیت/مرزبندی فوری",
@@ -49,31 +57,35 @@ const NEED_STRATEGIES = {
 };
 
 const STRATEGY_INFO = {
-  "اطمینان از امنیت/مرزبندی فوری": "مکث/توقف گفتگو، فاصله گرفتن، «بعداً ادامه می‌دیم».",
-  "کاهش ریسک/توقف موقعیت": "کم کردن احتمال آسیب: خروج کوتاه، تعویق تصمیم.",
-  "جمع‌آوری اطلاعات/شفاف‌سازی": "سؤال دقیق، درخواست مثال/جزئیات، واقعیت‌سنجی.",
-  "کنترل/مدیریت منابع": "تنظیم زمان/پول/امکانات برای امن‌ماندن.",
-  "درخواست کمک/حمایت عملی": "صریح کمک خواستن: «می‌تونی فلان کارو انجام بدی؟».",
-  "درخواست توجه/شنیده‌شدن": "خواهش برای شنیدن بدون قطع کردن.",
+  "اطمینان از امنیت/مرزبندی فوری": "مکث/توقف گفتگو؛ فاصله گرفتن؛ «الان امن نیست—بعداً ادامه می‌دهیم».",
+  "کاهش ریسک/توقف موقعیت": "کم‌کردن احتمال آسیب: خروج کوتاه؛ تعویق تصمیم؛ پایین آوردن شدت بحث.",
+  "جمع‌آوری اطلاعات/شفاف‌سازی": "سؤال دقیق؛ درخواست مثال/جزئیات؛ واقعیت‌سنجی پیش از واکنش.",
+  "کنترل/مدیریت منابع": "تنظیم زمان/پول/امکانات برای امن و منظم‌ماندن.",
+  "درخواست کمک/حمایت عملی": "صریح کمک خواستن: «می‌تونی فلان کار رو انجام بدی؟».",
+
+  "درخواست توجه/شنیده‌شدن": "خواهش برای شنیدن بدون قطع‌کردن.",
   "جستجوی حمایت/همدلی": "می‌گم الان همدلی می‌خوام، نه راهکار.",
-  "نزدیکی/برقراری تماس": "در آغوش/پیام دوستانه/تماس.",
-  "همکاری/شراکت": "دعوت به انجام مشترک کار.",
-  "مرزبندی محترمانه برای حفظ رابطه": "نه محترمانه برای جلوگیری از دلخوری.",
-  "بیان نظر قاطع/ایستادن پای موضع": "روشن و محترمانه موضعم را می‌گویم.",
-  "تعیین معیار/استاندارد": "تعریف شفاف کیفیت/زمان.",
-  "دفاع از شایستگی/ارزش": "مثال و شواهد از توانمندی‌ها.",
-  "هدایت گفتگو/تصمیم‌گیری": "تسهیل جلسه، جمع‌بندی، تعیین مسئولیت‌ها.",
-  "بازخورد مشخص به عملکرد": "رفتار مشخص + اثرش + انتظار اصلاح.",
-  "نه گفتن/مرزبندی": "رد محترمانه فشار/درخواست.",
-  "پیشنهاد گزینهٔ جایگزین": "به‌جای نه مطلق، راه‌حل جایگزین.",
-  "تغییر موضوع/مسیر": "هدایت گفتگو/کار به مسیر مفیدتر.",
-  "درخواست زمان/فرصت": "مهلت برای تصمیم/کیفیت بهتر.",
-  "خودمختاری در انجام کار": "انتخاب شیوه اجرا/ابزار/زمان‌بندی.",
-  "شوخ‌طبعی/لطیفه": "طنز ملایم برای کاهش تنش.",
-  "بازی/خلاقیت": "رویکرد بازی‌گونه/خلاقانه.",
-  "سبک‌کردن فضا": "تنفس کوتاه/استراحت/موسیقی.",
-  "دعوت به فعالیت لذت‌بخش": "قهوه/پیاده‌روی/فعالیت مشترک.",
-  "یادگیری/کاوش کنجکاوانه": "امتحان ایدهٔ جدید/پرسش کنجکاوانه."
+  "نزدیکی/برقراری تماس": "در آغوش/پیام دوستانه/تماس برای حس پیوند.",
+  "همکاری/شراکت": "دعوت به انجام مشترک کار: «با هم برنامه بچینیم».",
+  "مرزبندی محترمانه برای حفظ رابطه": "نهِ محترمانه برای جلوگیری از دلخوری بعدی.",
+
+  "بیان نظر قاطع/ایستادن پای موضع": "روشن و محترمانه موضعم را می‌گویم و می‌ایستم.",
+  "تعیین معیار/استاندارد": "تعریف شفاف کیفیت/زمان: «تعریفِ آماده این‌هاست».",
+  "دفاع از شایستگی/ارزش": "ارائهٔ مثال/شواهد از توانمندی‌هام؛ پاسخ به تضعیف ارزش.",
+  "هدایت گفتگو/تصمیم‌گیری": "تسهیل جلسه؛ جمع‌بندی؛ تعیین مسئولیت‌ها.",
+  "بازخورد مشخص به عملکرد": "رفتار مشخص + اثرش + انتظار اصلاح؛ بدون برچسب شخصی.",
+
+  "نه گفتن/مرزبندی": "رد محترمانه فشار/درخواست: «الان نمی‌پذیرم».",
+  "پیشنهاد گزینهٔ جایگزین": "به‌جای نهِ مطلق، راه‌حل جایگزین می‌دهم.",
+  "تغییر موضوع/مسیر": "گفتگو/کار را به مسیر مفیدتر می‌برم.",
+  "درخواست زمان/فرصت": "مهلت می‌گیرم تا تصمیم/کیفیت بهتر شود.",
+  "خودمختاری در انجام کار": "شیوهٔ اجرا/ابزار/زمان‌بندی را خودم انتخاب می‌کنم.",
+
+  "شوخ‌طبعی/لطیفه": "طنز ملایم برای کاهش تنش (بدون تمسخر).",
+  "بازی/خلاقیت": "رویکرد بازی‌گونه/خلاقانه برای حل مسئله.",
+  "سبک‌کردن فضا": "تنفس کوتاه/استراحت/موسیقی برای نرم شدن فضا.",
+  "دعوت به فعالیت لذت‌بخش": "پیشنهاد قهوه/پیاده‌روی/فعالیت باحال مشترک.",
+  "یادگیری/کاوش کنجکاوانه": "امتحان ایدهٔ جدید/پرسش کنجکاوانه برای لذت."
 };
 
 const GAMES = [
@@ -89,36 +101,129 @@ const GAMES = [
 
 const GAME_INFO = {
   "چرا نمی‌کنی—آره، ولی…": {
-    desc: "پیشنهاد می‌گیری و با «ولی…» خنثی می‌کنی.",
-    anti: "پیشنهاد ندِه؛ قرارداد مسئولیت ببند."
+    desc: "پیشنهاد می‌گیری اما هر کدام را با «ولی…» خنثی می‌کنی تا گیرماندگی تأیید شود.",
+    anti: "پیشنهاد نده؛ قرارداد مسئولیت ببند: «دقیقاً چه کمکی می‌خوای؟ راه‌حل خودت چیه؟»"
   },
   "بزن منو": {
-    desc: "دعوت به انتقاد برای تأیید قربانی بودن.",
-    anti: "مرزبندی + بازخورد بالغ و مشخص."
+    desc: "زمینهٔ انتقاد را فراهم می‌کنم تا تأیید کنم «من بد/قربانی‌ام».",
+    anti: "مرزبندی + بازخورد بالغِ مشخصِ رفتاری؛ نه تنبیه/طعنه."
   },
   "حالا گرفتمت…!": {
-    desc: "کمین برای خطای کوچک و انفجار سرزنش.",
-    anti: "معیار روشن و تمرکز بر ترمیم."
+    desc: "کمین برای خطای کوچک و انفجار سرزنش؛ «دیگران بدند».",
+    anti: "شفاف‌سازی معیارها و تمرکز بر ترمیم نه مجازات."
   },
   "اگر تو نبودی…": {
-    desc: "دیگری بهانهٔ نرفتن به سمت آزادی/هدف.",
-    anti: "تمرکز بر اختیار و یک گام مستقل."
+    desc: "دیگری بهانهٔ نرفتن به سمت آزادی/هدف می‌شود.",
+    anti: "تمرکز بر اختیار: یک گام کوچک مستقل تعریف کن."
   },
   "لکه پیدا کن": {
-    desc: "در هر نتیجه عیب پیدا می‌شود.",
-    anti: "معیار روشن + قدردانی واقعی."
+    desc: "هر کاری کنی عیبی پیدا می‌شود تا «من برتر/تو ناکافی».",
+    anti: "معیارهای روشنِ کیفیت + قدردانی واقعی از بخش‌های خوب."
   },
   "ببین منو مجبور کردی": {
-    desc: "فرافکنی مسئولیت پیامدها.",
-    anti: "بازگرداندن مسئولیت انتخاب."
+    desc: "فرافکنی مسئولیت پیامدها به دیگری.",
+    anti: "بازگرداندن مسئولیت: «انتخاب بعدی تو چیه؟»"
   },
   "هیاهو": {
-    desc: "بالابردن تنش تا اصل موضوع گم شود.",
-    anti: "کند کردن سرعت، گفت‌وگوی بالغ–بالغ."
+    desc: "بالا بردن تنش/هیجان تا اصل موضوع گم شود.",
+    anti: "کند کردن سرعت؛ زمان‌بندی؛ گفت‌وگوی بالغ–بالغ."
   },
   "بذار این و اون بجنگن": {
-    desc: "تحریک دو نفر دیگر به درگیری.",
-    anti: "امتناع از واسطه‌گری مخرب."
+    desc: "تحریک دو نفر دیگر به درگیری برای دور ماندن از مسئولیت.",
+    anti: "امتناع از واسطه‌گریِ مخرب؛ هدایت به گفت‌وگوی مستقیم."
+  }
+};
+
+const GAME_SWITCH_GUIDE = {
+  "چرا نمی‌کنی—آره، ولی…": {
+    cues: [
+      "ردِ پشت‌سرهمِ پیشنهادها با «ولی…»",
+      "درخواست کمک بدون پذیرش مسئولیت/راه‌حلِ خود"
+    ],
+    examples: [
+      "بعد از سومین «ولی…»، من از نجاتگر → آزارگر چرخیدم و او به قربانی رفت.",
+      "وقتی پرسیدم «خودت چه راه‌حلی داری؟»، تنش بالا رفت و نقش‌ها چرخید."
+    ]
+  },
+  "بزن منو": {
+    cues: [
+      "خودتحقیری/بی‌دفاع کردن خود برای دعوت به انتقاد",
+      "چیدمان موقعیت‌هایی که احتمال ایراد گرفتن بالاست"
+    ],
+    examples: [
+      "وقتی نقد تند کردم، او قربانی شد و بازی payoff گرفت.",
+      "با یک طعنهٔ کوچک من، سوئیچ رخ داد (من آزارگر/او قربانی)."
+    ]
+  },
+  "حالا گرفتمت…!": {
+    cues: [
+      "کمین برای خطای کوچک و بزرگنمایی آن",
+      "سفت/صفر-یکی شدن ناگهانی معیارها"
+    ],
+    examples: [
+      "به محض یک اشتباه ریز، او آزارگر شد و من قربانی.",
+      "وقتی گفت «دیدی گفتم بلد نیستی»، سوئیچ روشن شد."
+    ]
+  },
+  "اگر تو نبودی…": {
+    cues: [
+      "نسبت‌دادن موانع آزادی/هدف به دیگری",
+      "واکنش سرزنش‌گرانه به مرزبندی"
+    ],
+    examples: [
+      "گفتم «الان وقت ندارم»، جواب: «تو همیشه منو محدود می‌کنی» → سوئیچ.",
+      "با پیشنهاد یک گام مستقل، نقش‌ها به قربانی/آزارگر چرخید."
+    ]
+  },
+  "לکه پیدا کن": { // در بعضی فونت‌ها کاف جدا می‌شود—برای ایمنی می‌گذاریم همانی بماند.
+    cues: [
+      "جستجوی عیب در هر نتیجه",
+      "تغییر معیارها برای ناممکن کردن «خوب بودن»"
+    ],
+    examples: [
+      "پس از تحویل کار، با یافتن عیب تازه، او آزارگر شد.",
+      "وقتی معیار را در لحظه عوض کرد، سوئیچ رخ داد."
+    ]
+  },
+  "لکه پیدا کن": {
+    cues: [
+      "جستجوی عیب در هر نتیجه",
+      "تغییر معیارها برای ناممکن کردن «خوب بودن»"
+    ],
+    examples: [
+      "پس از تحویل کار، با یافتن عیب تازه، او آزارگر شد.",
+      "وقتی معیار را در لحظه عوض کرد، سوئیچ رخ داد."
+    ]
+  },
+  "ببین منو مجبور کردی": {
+    cues: [
+      "فرافکنی: «تو باعث شدی…»",
+      "انکار نقش شخصی در پیامد"
+    ],
+    examples: [
+      "«تو باعث شدی عصبانی بشم» → نقش‌ها چرخید.",
+      "با انداختن تقصیر، از حل‌مسئله خارج شدیم (سوئیچ)."
+    ]
+  },
+  "هیاهو": {
+    cues: [
+      "افزایش ناگهانی صدا/شتاب و تغییر موضوع از اصل",
+      "هجوم مثال‌های قدیمی"
+    ],
+    examples: [
+      "با بالا رفتن صدا و عوض شدن موضوع، سوئیچ اتفاق افتاد.",
+      "وقتی بحث رفت سمت گذشتهٔ بی‌ربط، نقش‌ها جابه‌جا شد."
+    ]
+  },
+  "بذار این و اون بجنگن": {
+    cues: [
+      "تحریک دو نفر دیگر به درگیری",
+      "کنار کشیدن از مسئولیت خود"
+    ],
+    examples: [
+      "به‌جای گفت‌وگوی مستقیم، دوتای دیگر را به جان هم انداخت → سوئیچ.",
+      "با «تو به فلانی بگو…» مسیر بازی شد."
+    ]
   }
 };
 
@@ -139,7 +244,7 @@ function goto(id) {
   S.step = id;
 }
 
-// helper: ساخت چیپ‌های انتخابی
+// ساخت چیپ‌های انتخابی
 function makeChips(container, items, multi = false, selected = [], onToggle) {
   container.innerHTML = "";
   items.forEach(txt => {
@@ -157,7 +262,7 @@ function makeChips(container, items, multi = false, selected = [], onToggle) {
   });
 }
 
-// زیرنقش‌ها (نمایش فوری داخل همان مرحله)
+// زیرنقش‌ها (نمایش فوری)
 function showSubroles(target) {
   const role = target === "your" ? S.your.role : S.other.role;
   const box = document.getElementById(target === "your" ? "your-subroles" : "other-subroles");
@@ -199,54 +304,45 @@ document.getElementById("emotion-free").addEventListener("keydown", e => {
 });
 
 // نیازها
-const needHelp = {
-  "بقا 🛡️": "امنیت/سلامت/پول/نظم؛ وقتی شرایط ناپایدار یا خطرناک حس می‌شود.",
-  "عشق و تعلق 💞": "ارتباط، صمیمیت، پذیرفته‌شدن؛ دیده‌شدن و پیوند.",
-  "قدرت و ارزشمندی 💪": "موثر بودن، احترام، موفقیت، کنترل.",
-  "آزادی 🕊️": "استقلال، حق انتخاب، آزادی تصمیم.",
-  "تفریح و لذت 🎨": "سرگرمی، خلاقیت، خنده و یادگیری لذت‌بخش."
-};
-document.getElementById("needs-help").textContent =
-  "ابتدا نیازها را انتخاب کن؛ بعد برای هر مورد شدت/جهت/راهبرد/نتیجه می‌پرسیم.";
-
-// ساخت لیست نیازها (چندانتخابی)
 const yourNeedsList = document.getElementById("your-needs-list");
 makeChips(yourNeedsList, NEEDS, true, [], (val, checked) => {
   if (checked) S.your.needs.push(val);
   else S.your.needs = S.your.needs.filter(x => x !== val);
 });
 
-const otherNeedsList = document.getElementById("other-needs-list");
-makeChips(otherNeedsList, NEEDS, true, [], (val, checked) => {
-  if (checked) S.other.needs.push(val);
-  else S.other.needs = S.other.needs.filter(x => x !== val);
-});
+// راهنمای کوتاهِ نیازها (بدون شلوغی)
+(function fillNeedsCheatsheet(){
+  const ul = document.getElementById("needs-cheatsheet-list");
+  ul.innerHTML = "";
+  NEEDS.forEach(n => {
+    const li = document.createElement("li");
+    li.textContent = `• ${n} — ${NEED_SHORT[n]}`;
+    ul.appendChild(li);
+  });
+})();
 
 // راهنمای مرحلهٔ جزییات
 function intensityHelp(need) {
   return {
     q: `🌡️ شدت درگیری «${need}» را انتخاب کن (۱ تا ۵)`,
-    h: "شدت یعنی این نیاز چقدر در افکار/احساس/رفتار حضور داشت. 1=خیلی کم … 5=خیلی زیاد."
+    h: "1 = خیلی کم\n2 = کم/ملایم\n3 = متوسط (قابل‌توجه)\n4 = زیاد (محور واکنش‌ها)\n5 = خیلی زیاد (تقریباً همه‌چیز حول این نیاز)"
   };
 }
 function valenceHelp(need) {
   return {
     q: `↕️ جهت درگیری «${need}» را انتخاب کن`,
-    h: "➕ ارضا/دستیابی: برای رسیدن به نیاز اقدام شد. ➖ دفاع/پرهیز: برای حفاظت از تهدیدِ نیاز اقدام شد."
+    h: "➕ ارضا/دستیابی: برای رسیدن به نیاز اقدام شد.\n➖ دفاع/پرهیز: برای حفاظت از تهدیدِ نیاز اقدام شد."
   };
 }
 function strategyHelp(need) {
   const items = NEED_STRATEGIES[need] || [];
   const lines = items.map(x => `• ${x} — ${STRATEGY_INFO[x] || ""}`).join("\n");
-  return {
-    q: `🛠️ چه راهبردی برای «${need}» به‌کار رفت؟`,
-    h: lines || "می‌توانی خودت هم بنویسی."
-  };
+  return { q: `🛠️ چه راهبردی برای «${need}» به‌کار رفت؟`, h: lines || "می‌توانی خودت هم بنویسی." };
 }
 function outcomeHelp(need) {
   return {
     q: `🎯 نتیجهٔ نهایی برای «${need}»؟`,
-    h: "✅ برآورده شد — ◼️ تا حدی — ❌ برآورده نشد"
+    h: "✅ برآورده شد — نیاز به‌طور رضایت‌بخش تأمین شد.\n◼️ تا حدی — بخشی تأمین شد/موقت بود.\n❌ برآورده نشد — تأمین نشد یا بدتر شد."
   };
 }
 
@@ -261,7 +357,6 @@ function renderDetail(target) {
   detail.target = target;
   const isYour = target === "your";
   const needs = isYour ? S.your.needs : S.other.needs;
-  const contId = isYour ? "" : "-other";
 
   if (!needs.length) {
     goto(isYour ? "your-needs" : "other-needs");
@@ -275,6 +370,7 @@ function renderDetail(target) {
   const optEl = document.getElementById(isYour ? "detail-options" : "detail-options-other");
 
   titleEl.textContent = `جزئیات: ${need}`;
+
   let qh;
   if (detail.step === "intensity") qh = intensityHelp(need);
   if (detail.step === "valence") qh = valenceHelp(need);
@@ -287,19 +383,13 @@ function renderDetail(target) {
   // گزینه‌ها
   optEl.innerHTML = "";
   if (detail.step === "intensity") {
-    makeChips(optEl, ["1","2","3","4","5"], false, [], (val) => {
-      setDetailValue(need, "intensity", Number(val), isYour);
-    });
+    makeChips(optEl, ["1","2","3","4","5"], false, [], (val) => setDetailValue(need, "intensity", Number(val), isYour));
   } else if (detail.step === "valence") {
-    makeChips(optEl, ["➕ ارضا/دستیابی","➖ دفاع/پرهیز"], false, [], (val) => {
-      setDetailValue(need, "valence", val, isYour);
-    });
+    makeChips(optEl, ["➕ ارضا/دستیابی","➖ دفاع/پرهیز"], false, [], (val) => setDetailValue(need, "valence", val, isYour));
   } else if (detail.step === "strategy") {
     const items = NEED_STRATEGIES[need] || [];
-    makeChips(optEl, items, false, [], (val) => {
-      setDetailValue(need, "strategy", val, isYour);
-    });
-    // ورودی تایپ آزاد
+    makeChips(optEl, items, false, [], (val) => setDetailValue(need, "strategy", val, isYour));
+    // تایپ آزاد
     const free = document.createElement("input");
     free.placeholder = "راهبرد دیگر (Enter)";
     free.addEventListener("keydown", e => {
@@ -310,9 +400,7 @@ function renderDetail(target) {
     });
     optEl.appendChild(free);
   } else if (detail.step === "outcome") {
-    makeChips(optEl, ["✅ برآورده شد","◼️ تا حدی","❌ برآورده نشد"], false, [], (val) => {
-      setDetailValue(need, "outcome", val, isYour);
-    });
+    makeChips(optEl, ["✅ برآورده شد","◼️ تا حدی","❌ برآورده نشد"], false, [], (val) => setDetailValue(need, "outcome", val, isYour));
   }
 
   goto(isYour ? "your-need-detail" : "other-need-detail");
@@ -324,26 +412,22 @@ function setDetailValue(need, key, value, isYour) {
   bag[need][key] = value;
 }
 
-// کنترل دکمه‌های detail
+// کنترل دکمه‌های detail (your)
 document.getElementById("detail-back").addEventListener("click", () => {
   if (detail.step === "intensity") {
     goto("your-needs");
   } else if (detail.step === "valence") {
-    detail.step = "intensity";
-    renderDetail("your");
+    detail.step = "intensity"; renderDetail("your");
   } else if (detail.step === "strategy") {
-    detail.step = "valence";
-    renderDetail("your");
+    detail.step = "valence"; renderDetail("your");
   } else if (detail.step === "outcome") {
-    detail.step = "strategy";
-    renderDetail("your");
+    detail.step = "strategy"; renderDetail("your");
   }
 });
 document.getElementById("detail-next").addEventListener("click", () => {
   const needs = S.your.needs;
   const need = needs[detail.index] || "";
   const info = S.your.needDetails[need] || {};
-  // اطمینان از پرشدن مقدار
   const required = { intensity: "intensity", valence: "valence", strategy: "strategy", outcome: "outcome" }[detail.step];
   if (!info[required]) return toast("اول یک گزینه انتخاب کن.");
 
@@ -351,24 +435,14 @@ document.getElementById("detail-next").addEventListener("click", () => {
   else if (detail.step === "valence") detail.step = "strategy";
   else if (detail.step === "strategy") detail.step = "outcome";
   else if (detail.step === "outcome") {
-    // نیاز بعدی یا رفتن به بخش نیازهای طرف مقابل
-    if (detail.index + 1 < needs.length) {
-      detail.index += 1;
-      detail.step = "intensity";
-    } else {
-      // شروع نیازهای طرف مقابل
-      detail.index = 0;
-      detail.step = "intensity";
-      goto("other-needs");
-      return;
-    }
+    if (detail.index + 1 < needs.length) { detail.index += 1; detail.step = "intensity"; }
+    else { detail.index = 0; detail.step = "intensity"; goto("other-needs"); return; }
   }
   renderDetail("your");
 });
 
 // other detail
 document.getElementById("detail-back-other").addEventListener("click", () => {
-  const needs = S.other.needs;
   if (detail.step === "intensity") {
     goto("other-needs");
   } else if (detail.step === "valence") {
@@ -390,13 +464,8 @@ document.getElementById("detail-next-other").addEventListener("click", () => {
   else if (detail.step === "valence") detail.step = "strategy";
   else if (detail.step === "strategy") detail.step = "outcome";
   else if (detail.step === "outcome") {
-    if (detail.index + 1 < needs.length) {
-      detail.index += 1; detail.step = "intensity";
-    } else {
-      // می‌رویم به بازی‌ها
-      goto("games");
-      return;
-    }
+    if (detail.index + 1 < needs.length) { detail.index += 1; detail.step = "intensity"; }
+    else { goto("games"); return; }
   }
   renderDetail("other");
 });
@@ -411,7 +480,7 @@ makeChips(gameChips, GAMES, true, [], (val, checked) => {
   else S.games.names = S.games.names.filter(x => x !== val);
   renderSwitchGuide();
 });
-gameYesNo.addEventListener("change", e => {
+gameYesNo.addEventListener("change", () => {
   const v = document.querySelector('input[name="game-flag"]:checked')?.value || "خیر";
   S.games.flag = v;
   if (v === "بله") gameSelectBox.classList.remove("hidden");
@@ -420,12 +489,28 @@ gameYesNo.addEventListener("change", e => {
 document.getElementById("game-switch-note").addEventListener("input", e => {
   S.games.switchNote = e.currentTarget.value;
 });
+
+// پرکردن «راهنمای کامل بازی‌ها»
+(function fillGamesCheatsheet(){
+  const body = document.getElementById("games-cheatsheet-body");
+  const lines = [];
+  GAMES.forEach(n => {
+    const g = GAME_INFO[n] || {};
+    lines.push(`— ${n}\nچیست؟ ${g.desc || ""}\nآنتی‌تز: ${g.anti || ""}\n`);
+  });
+  body.textContent = lines.join("\n");
+})();
+
 function renderSwitchGuide() {
   if (!S.games.names.length) { switchGuide.textContent = ""; return; }
-  const lines = S.games.names.map(n =>
-    `• ${n}: ${GAME_INFO[n]?.anti || ""}`
-  );
-  switchGuide.textContent = "🧭 آنتی‌تزهای پیشنهادی:\n" + lines.join("\n");
+  const blocks = S.games.names.map(n => {
+    const gi = GAME_INFO[n] || {};
+    const sw = GAME_SWITCH_GUIDE[n] || GAME_SWITCH_GUIDE["לکه پیدا کن"]; // fallback تایپی
+    const cues = (sw?.cues || []).map(x => `  • ${x}`).join("\n");
+    const ex  = (sw?.examples || []).map(x => `  • ${x}`).join("\n");
+    return `• ${n}\nچیست؟ ${gi.desc || ""}\nآنتی‌تز: ${gi.anti || ""}\nنشانه‌های سوئیچ:\n${cues || "  —"}\nنمونهٔ سوئیچ:\n${ex || "  —"}`;
+  });
+  switchGuide.textContent = "🧭 راهنما:\n" + blocks.join("\n\n");
 }
 
 // نام‌ها و خلاصه (intro → your-role)
@@ -440,7 +525,7 @@ document.getElementById("next-0").addEventListener("click", () => {
 document.getElementById("your-role-group").addEventListener("change", () => {
   const v = document.querySelector('input[name="your-role"]:checked')?.value;
   S.your.role = v || "";
-  showSubroles("your"); // ← فوراً زیرنقش را باز کن
+  showSubroles("your");
 });
 document.getElementById("next-your-role").addEventListener("click", () => {
   if (!S.your.role) return toast("اول نقش خودت را انتخاب کن.");
@@ -453,7 +538,7 @@ document.getElementById("next-your-role").addEventListener("click", () => {
 document.getElementById("other-role-group").addEventListener("change", () => {
   const v = document.querySelector('input[name="other-role"]:checked')?.value;
   S.other.role = v || "";
-  showSubroles("other"); // ← فوراً زیرنقش را باز کن
+  showSubroles("other");
 });
 document.getElementById("next-other-role").addEventListener("click", () => {
   if (!S.other.role) return toast("نقش طرف مقابل را انتخاب کن.");
@@ -484,8 +569,8 @@ document.getElementById("next-other-needs").addEventListener("click", () => {
 
 // بازی‌ها → خلاصه
 document.getElementById("next-games").addEventListener("click", () => {
-  if (!S.games.flag) S.games.flag = "خیر";
-  if (S.games.flag === "بله" && !S.games.names.length) return toast("حداقل یک بازی انتخاب کن یا «خیر» را بزن.");
+  if (S.games.flag === "بله" && !S.games.names.length)
+    return toast("حداقل یک بازی انتخاب کن یا «خیر» را بزن.");
   buildSummary();
   goto("summary");
 });
@@ -580,27 +665,12 @@ document.getElementById("btn-view").addEventListener("click", () => {
   listRecords();
   goto("records");
 });
-document.getElementById("btn-new").addEventListener("click", () => {
-  location.reload();
-});
-
-// اکپورت‌ها
-document.getElementById("btn-export-json").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(loadRecords(), null, 2)], { type: "application/json" });
-  downloadBlob(blob, "ta-records.json");
-});
-document.getElementById("btn-export-csv").addEventListener("click", () => {
-  const rows = loadRecords().map(r => `"${String(r.text).replace(/"/g,'""')}"`);
-  const csv = "text\n" + rows.join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  downloadBlob(blob, "ta-records.csv");
-});
+document.getElementById("btn-new").addEventListener("click", () => resetWizard());
 
 // اشتراک/کپی
 async function shareText(text) {
   if (navigator.share) {
-    try { await navigator.share({ text }); }
-    catch(e) { /* user canceled */ }
+    try { await navigator.share({ text }); } catch(e) {}
   } else {
     copyText(text);
   }
@@ -610,7 +680,6 @@ async function copyText(text) {
     await navigator.clipboard.writeText(text);
     toast("در کلیپ‌بورد کپی شد 📋");
   } catch {
-    // fallback
     const ta = document.createElement("textarea");
     ta.value = text; document.body.appendChild(ta);
     ta.select(); document.execCommand("copy");
@@ -626,7 +695,7 @@ function downloadBlob(blob, filename) {
   URL.revokeObjectURL(a.href);
 }
 
-// پاک‌سازی داده‌ها
+// پاک‌سازی ذخیره‌ها
 document.getElementById("btn-clear").addEventListener("click", () => {
   if (confirm("همهٔ ذخیره‌ها پاک شود؟")) {
     localStorage.removeItem(DB_KEY);
@@ -634,9 +703,53 @@ document.getElementById("btn-clear").addEventListener("click", () => {
   }
 });
 
-// ناوبری «بازگشت» در هدر هر صفحه
+// شروع از اول (ریست ویزارد—بدون حذف ذخیره‌ها)
+document.getElementById("btn-restart").addEventListener("click", () => resetWizard());
+function resetWizard() {
+  // حالت
+  S.step = "intro";
+  S.your = { name: "", role: "", subrole: "", needs: [], needDetails: {} };
+  S.other = { name: "", role: "", subrole: "", needs: [], needDetails: {} };
+  S.summary = "";
+  S.emotions = [];
+  S.games = { flag: "خیر", names: [], switchNote: "" };
+
+  // فرم‌ها
+  document.getElementById("your_name").value = "";
+  document.getElementById("other_name").value = "";
+  document.getElementById("summary").value = "";
+  document.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+  document.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+  document.getElementById("your-subroles").classList.add("hidden");
+  document.getElementById("other-subroles").classList.add("hidden");
+  document.getElementById("game-switch-note").value = "";
+  document.getElementById("switch-guide").textContent = "";
+  document.getElementById("game-select").classList.add("hidden");
+
+  // بازسازی چیپ احساسات (برای پاک شدن انتخاب‌های آزاد)
+  makeChips(emotionChips, EMOTIONS, true, [], (val, checked) => {
+    if (checked) S.emotions.push(val);
+    else S.emotions = S.emotions.filter(x => x !== val);
+  });
+
+  goto("intro");
+}
+
+// ناوبری «بازگشت»
 document.querySelectorAll("[data-back]").forEach(btn => {
   btn.addEventListener("click", () => goto(btn.getAttribute("data-back")));
+});
+
+// اکپورت‌ها
+document.getElementById("btn-export-json").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(loadRecords(), null, 2)], { type: "application/json" });
+  downloadBlob(blob, "ta-records.json");
+});
+document.getElementById("btn-export-csv").addEventListener("click", () => {
+  const rows = loadRecords().map(r => `"${String(r.text).replace(/"/g,'""')}"`);
+  const csv = "text\n" + rows.join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  downloadBlob(blob, "ta-records.csv");
 });
 
 // سرویس‌ورکر
