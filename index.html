@@ -1,16 +1,39 @@
 <!doctype html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="manifest" href="./manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta name="theme-color" content="#111111">
-  <link rel="icon" href="./icon-192.png">
-  <title>TAPWA</title>
+  <title>TAPWA — TA Logger (PWA)</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div id="app"></div>
+  <header class="app-header">
+    <h1>ربات ثبت تجربه‌های TA (نسخه PWA آفلاین)</h1>
+    <div class="header-actions">
+      <button id="btn-export" class="ghost">خروجی CSV</button>
+      <button id="btn-clear" class="ghost danger">پاک‌کردن داده‌ها</button>
+    </div>
+  </header>
+
+  <main id="stage" class="stage" aria-live="polite"></main>
+
+  <footer class="app-footer">
+    <div class="footer-actions">
+      <button id="btn-back" class="secondary">⬅️ بازگشت</button>
+      <button id="btn-next" class="primary">ادامه ➡️</button>
+      <button id="btn-reset" class="ghost">شروع از اول 🔄</button>
+    </div>
+    <small class="hint">آفلاین کار می‌کند — افزودن به صفحهٔ اصلی را از منوی مرورگر بزن.</small>
+  </footer>
+
   <script src="./app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
