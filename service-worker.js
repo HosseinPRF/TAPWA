@@ -1,4 +1,4 @@
-const CACHE_NAME = "tapwa-v4";
+const CACHE_NAME = "tapwa-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -24,9 +24,7 @@ self.addEventListener("activate", e => {
 });
 
 self.addEventListener("fetch", e => {
-  const url = new URL(e.request.url);
   if (e.request.method !== "GET") return;
-  // cache-first
   e.respondWith(
     caches.match(e.request).then(res => res || fetch(e.request).then(resp => {
       const copy = resp.clone();
