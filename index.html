@@ -14,7 +14,10 @@
 <body>
   <header class="appbar">
     <h1>دفترچهٔ TA (آفلاین)</h1>
-    <button id="btn-clear" class="ghost">پاک‌سازی داده‌ها</button>
+    <div class="appbar-actions">
+      <button id="btn-restart" class="ghost">شروع از اول 🔄</button>
+      <button id="btn-clear" class="ghost">پاک‌سازی داده‌ها</button>
+    </div>
   </header>
 
   <main id="app">
@@ -34,6 +37,7 @@
         </label>
       </div>
       <div class="nav">
+        <span></span>
         <button id="next-0" class="primary">ادامه</button>
       </div>
     </section>
@@ -42,7 +46,9 @@
     <section class="screen" id="screen-your-role">
       <h2>نقش خودت را انتخاب کن</h2>
       <p class="help">🎭
-        کودک 👶 (خودانگیختگی/احساس)، بالغ 🧠 (واقع‌بین/حل‌مسئله)، والد 👨‍🏫 (قواعد/حمایت یا انتقاد)
+        کودک 👶 (خودانگیختگی/احساس)
+        <br>بالغ 🧠 (واقع‌بین/حل‌مسئله)
+        <br>والد 👨‍🏫 (قواعد/حمایت یا انتقاد)
       </p>
 
       <fieldset id="your-role-group" class="chips">
@@ -62,7 +68,7 @@
     <!-- گام 2: نقش طرف مقابل (+ زیرنقش فوری) -->
     <section class="screen" id="screen-other-role">
       <h2>نقش طرف مقابل را انتخاب کن</h2>
-      <p class="help">👤 مشابه بالا؛ در صورت «کودک/والد» زیرنقش باز می‌شود.</p>
+      <p class="help">👤 مشابه بالا؛ اگر «کودک/والد» باشد، زیرنقش همین‌جا باز می‌شود.</p>
 
       <fieldset id="other-role-group" class="chips">
         <label><input type="radio" name="other-role" value="کودک" />کودک</label>
@@ -98,8 +104,16 @@
     <!-- گام 4: نیازهای تو (چندانتخابی) -->
     <section class="screen" id="screen-your-needs">
       <h2>نیازهای تو در این موقعیت</h2>
-      <p class="help" id="needs-help"></p>
+      <p class="help">ابتدا نیازها را انتخاب کن؛ سپس برای هر مورد «شدت/جهت/راهبرد/نتیجه» می‌پرسیم.</p>
+
       <div id="your-needs-list" class="chips multi"></div>
+
+      <!-- راهنمای کوتاهِ هر نیاز (جمع‌شونده) -->
+      <details id="needs-cheatsheet" class="sheet">
+        <summary>راهنمای کوتاه نیازها</summary>
+        <ul id="needs-cheatsheet-list"></ul>
+      </details>
+
       <div class="nav">
         <button data-back="emotions" class="ghost">بازگشت</button>
         <button id="next-your-needs" class="primary">ادامه</button>
@@ -145,9 +159,11 @@
     <!-- گام 8: بازی‌ها -->
     <section class="screen" id="screen-games">
       <h2>آیا این موقعیت «بوی بازی» می‌داد؟</h2>
-      <p class="help">
-        بازی یعنی الگوی تکراری که ظاهراً منطقی‌ست ولی معمولاً با سوئیچ نقش‌ها و احساس بد تمام می‌شود.
-      </p>
+      <details id="games-cheatsheet" class="sheet">
+        <summary>راهنمای کامل بازی‌ها (تعریف + آنتی‌تز)</summary>
+        <div id="games-cheatsheet-body" class="note"></div>
+      </details>
+
       <div id="game-yesno" class="chips">
         <label><input type="radio" name="game-flag" value="بله" />بله</label>
         <label><input type="radio" name="game-flag" value="خیر" />خیر</label>
@@ -158,7 +174,7 @@
         <div id="game-chips" class="chips multi"></div>
         <div id="switch-guide" class="note"></div>
         <label>لحظهٔ سوئیچ (۱–۲ جمله)
-          <textarea id="game-switch-note" rows="2"></textarea>
+          <textarea id="game-switch-note" rows="2" placeholder="محرک سوئیچ و چرخش نقش‌ها را بنویس..."></textarea>
         </label>
       </div>
 
