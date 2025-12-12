@@ -1,71 +1,125 @@
+/* همیشه روشن */
 :root{
-  --bg:#0b1120; --card:#0f172a; --muted:#94a3b8; --text:#e5e7eb;
-  --primary:#0ea5e9; --primary-2:#0284c7; --danger:#ef4444; --chip:#1e293b;
-  --ok:#16a34a; --warn:#f59e0b; --no:#ef4444;
+  color-scheme: light;               /* جلوگیری از دارک خودکار سیستم */
+  --bg:#ffffff;
+  --card:#ffffff;
+  --text:#111827;                    /* near-black */
+  --muted:#6b7280;                   /* خاکستری راهنما */
+  --primary:#0ea5e9;                 /* آبی روشن */
+  --primary-2:#0284c7;               /* آبی تیره‌تر برای hover/border */
+  --danger:#b91c1c;                  /* قرمز اخطار */
+  --chip:#f3f4f6;                    /* پس‌زمینه چیپ‌ها */
+  --border:#e5e7eb;
+  --border-2:#d1d5db;
+  --shadow:0 2px 10px rgba(0,0,0,.06);
 }
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text);
+  margin:0;
+  font-family:system-ui,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
 }
+
+/* اگر هدر/اپ‌بار داری */
 .appbar{
-  position:sticky; top:0; z-index:10; background:rgba(15,23,42,.7); backdrop-filter:blur(8px);
-  display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid #1f2937;
+  position:sticky; top:0; z-index:10;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:saturate(120%) blur(8px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 16px; border-bottom:1px solid var(--border);
 }
 .brand{display:flex; align-items:center; gap:10px}
-.logo{width:28px;height:28px}
+.logo{width:28px; height:28px}
 .appbar h1{font-size:16px; margin:0}
 .actions{display:flex; gap:8px}
+
+/* لایه‌بندی عمومی */
 .container{max-width:860px; margin:24px auto; padding:0 16px}
 .screen{display:block}
 .hidden{display:none!important}
+
 h2{margin:8px 0 16px}
 h3{margin:12px 0 8px}
+
+/* فیلدها */
 .field{display:flex; flex-direction:column; gap:6px; margin:8px 0}
 .field input,.field textarea{
-  background:#0b1226; border:1px solid #20304a; color:var(--text);
-  padding:10px 12px; border-radius:10px; outline:none;
+  background:#fff; border:1px solid var(--border-2); color:var(--text);
+  padding:10px 12px; border-radius:10px; outline:none; box-shadow:var(--shadow);
 }
 .field textarea{resize:vertical}
-.grid{display:grid; gap:12px; grid-template-columns:1fr; }
+
+/* گرید */
+.grid{display:grid; gap:12px; grid-template-columns:1fr}
 @media (min-width:640px){ .grid{grid-template-columns:1fr 1fr} }
-.helper{color:var(--muted); line-height:1.7; margin:8px 0}
+
+/* متن‌های کمکی */
+.helper{color:var(--muted); line-height:1.8; margin:8px 0; white-space:pre-line}
+
+/* کارت‌ها */
 .card{
-  background:var(--card); border:1px solid #1f2a44; border-radius:14px; padding:12px; margin:12px 0;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:12px; margin:12px 0; box-shadow:var(--shadow);
 }
+
+/* دکمه‌ها */
 .btn{
-  background:#1e283d; border:1px solid #2a3757; color:var(--text);
-  padding:10px 14px; border-radius:10px; cursor:pointer;
+  background:#f8fafc; border:1px solid var(--border-2); color:var(--text);
+  padding:10px 14px; border-radius:10px; cursor:pointer; box-shadow:var(--shadow);
 }
-.btn:hover{filter:brightness(1.1)}
+.btn:hover{filter:brightness(1.03)}
 .btn.primary{background:var(--primary); border-color:var(--primary-2); color:#03131e; font-weight:700}
-.btn.ghost{background:transparent}
+.btn.ghost{background:transparent; border:1px solid var(--border-2)}
 .btn.link{background:transparent; border:0; color:var(--primary)}
-.btn.danger{background:transparent; border-color:var(--danger); color:var(--danger)}
+.btn.danger{background:#fff; border-color:var(--danger); color:var(--danger)}
+
+/* ردیف‌ها */
 .row{display:flex; gap:8px; align-items:center}
 .row.wrap{flex-wrap:wrap}
 .nav-row{display:flex; justify-content:space-between; margin-top:16px}
+
+/* چیپ‌ها / انتخاب‌ها */
 .chips{display:flex; flex-wrap:wrap; gap:8px}
 .chip{
-  background:var(--chip); border:1px solid #2c3a5a; padding:8px 10px; border-radius:20px; cursor:pointer;
+  background:var(--chip); border:1px solid var(--border);
+  padding:8px 10px; border-radius:20px; cursor:pointer;
 }
 .chip.on{background:var(--primary); border-color:var(--primary-2); color:#04141f; font-weight:700}
+
+/* افزودن آزاد */
 .inline-add{display:flex; gap:8px; margin:12px 0}
 .inline-add input{flex:1}
-.selected{margin-top:6px; color:var(--muted)}
+
+/* انتخاب زیرنقش‌ها اگر داری */
 .role-block .row{flex-wrap:wrap}
 .role-title{font-weight:700; margin-bottom:6px}
 .subroles{display:none; margin-top:8px; gap:6px}
 .subroles.show{display:flex; flex-wrap:wrap}
-.hints{margin-top:6px; color:var(--muted); font-size:14px; line-height:1.7}
+
+/* نکته‌ها/راهنماها */
+.hints{margin-top:6px; color:var(--muted); font-size:14px; line-height:1.8}
+
+/* ویزارد */
 .wizard .q{margin:10px 0 6px; font-weight:700}
-.wizard .helper{white-space:pre-line}
 .pills{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0}
-.pill{background:#102036; border:1px solid #223352; padding:6px 10px; border-radius:999px; cursor:pointer}
-.pill.on{background:#0ea5e9; border-color:#0284c7; color:#04141f; font-weight:700}
-.game-info .card{margin-top:10px}
-.summary{
-  background:#0a1327; border:1px solid #1c2b4b; border-radius:12px; padding:12px; white-space:pre-wrap; line-height:1.8;
+.pill{
+  background:#fff; border:1px solid var(--border-2); padding:6px 10px;
+  border-radius:999px; cursor:pointer; box-shadow:var(--shadow)
 }
+.pill.on{background:#e0f2fe; border-color:#7dd3fc; color:#0c4a6e; font-weight:700}
+
+/* باکس توضیح بازی‌ها/آنتی‌تز */
+.game-info .card{margin-top:10px}
+
+/* خلاصه نهایی */
+.summary{
+  background:#fff; border:1px solid var(--border); border-radius:12px;
+  padding:12px; white-space:pre-wrap; line-height:1.9; box-shadow:var(--shadow);
+}
+
+/* فوتر */
 .footer{padding:24px 16px; text-align:center; color:var(--muted)}
-.store .item{border:1px solid #233558; border-radius:10px; padding:10px; margin:8px 0}
+.store .item{border:1px solid var(--border); border-radius:10px; padding:10px; margin:8px 0; background:#fff; box-shadow:var(--shadow)}
